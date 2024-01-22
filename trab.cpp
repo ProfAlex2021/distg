@@ -53,38 +53,32 @@ unsigned long long mergesort(std::vector<int>& A, int start, int end) {
 int main() {
     int N;
     std::cin >> N;
+    std::vector<int> A1(N), A2(N);
 
-    if (N < 0) {
-        exit(1);
-    }
-
-    std::vector<int> A1(N);
     for (int i = 0; i < N; ++i) {
         std::cin >> A1[i];
     }
 
-    std::vector<int> A2(N);
     for (int i = 0; i < N; ++i) {
         std::cin >> A2[i];
     }
 
-    std::vector<int> C1(N);
-    std::vector<int> C2(N);
 
     /*int center = N / 2;
     A2.assign(A1.begin() + center, A1.end());
     A1.resize(center);*/
 
+    std::unordered_map<int, int> C1(N);
     for (int i = 0; i < N; ++i) {
         C1[A1[i]] = i;
     }
 
+    std::vector<int> C2(N);
     for (int i = 0; i < N; ++i) {
         C2[i] = C1[A2[i]];
     }
 
     unsigned long long swap = mergesort(C2, 0, N);
-
     std::cout << swap << std::endl;
 
     return 0;
